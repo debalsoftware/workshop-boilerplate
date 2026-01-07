@@ -247,10 +247,11 @@ main .form label.required::after {
 
 main .form form p,
 main .form form .repeat-wrapper,
-main .form form .field-wrapper {
+main .form form .field-wrapper label {
     margin: var(--form-field-gap);
     color: var(--form-label-color);
     grid-column: span 12;
+    font-weight: var(--form-title-font-weight);
 }
 
 main .form form p {
