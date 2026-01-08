@@ -1,33 +1,27 @@
-.card .radio-wrapper { 
+.cards > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  grid-gap: 24px;
+}
 
-  min-width: 320px; 
+.cards > ul > li {
+  border: 1px solid #dadada;
+  background-color: var(--background-color);
+}
 
-  /* or whatever width fits your design */ 
+.cards .cards-card-body {
+  margin: 16px;
+}
 
-  max-width: 340px; 
+.cards .cards-card-image {
+  line-height: 0;
+}
 
-  background: #fff; 
-
-  border-radius: 16px; 
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); 
-
-  flex: 0 0 auto; 
-
-  scroll-snap-align: start; 
-
-  padding: 24px 16px; 
-
-  margin-bottom: 0; 
-
-  position: relative; 
-
-  transition: box-shadow 0.2s; 
-
-  display: flex; 
-
-  align-items: flex-start; 
-
-  gap: 12px; 
-
-} 
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
