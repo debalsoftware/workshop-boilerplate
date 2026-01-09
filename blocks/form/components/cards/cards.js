@@ -3,7 +3,7 @@
  * Based on: Radio Group
  */
 
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createOptimizedPicture } from '../../../../scripts/aem.js';
 /**
  * Decorates a custom form field component
  * @param {HTMLElement} fieldDiv - The DOM element containing the field wrapper. Refer to the documentation for its structure for each component.
