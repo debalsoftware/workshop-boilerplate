@@ -4,25 +4,64 @@
  */
 
 import { createOptimizedPicture } from '../../../../scripts/aem.js';
-/**
- * Decorates a custom form field component
- * @param {HTMLElement} fieldDiv - The DOM element containing the field wrapper. Refer to the documentation for its structure for each component.
- * @param {Object} fieldJson - The form json object for the component.
- * @param {HTMLElement} parentElement - The parent container element of the field.
- * @param {string} formId - The unique identifier of the form.
- */
-export default function decorate(element, fieldJson, container, formId) {
+import { subscribe } from '../../rules/index.js'; 
 
-    element.classList.add('card');
+function createCard(element, enums) { 
 
-    element.querySelectorAll('.radio-wrapper').forEach((radioWrapper) => {
+  element.querySelectorAll('.radio-wrapper').forEach((radioWrapper, index) => { 
 
-        const image = createOptimizedPicture('https://main--afb--jalagari.hlx.live/lab/images/card.png', 'card-image');
+    if (enums[index]?.name) { 
 
-        radioWrapper.appendChild(image);
+      let label = radioWrapper.querySelector('label'); 
 
-    });
+      if (!label) { 
 
-    return element;
+        label = document.createElement('label'); 
 
-}
+        radioWrapper.appendChild(label); 
+
+      } 
+
+      label.textContent = enums[index]?.name; 
+
+    } 
+
+    const image = createOptimizedPicture(enums[index].image || 'https://main--afb--jalagari.hlx.page/lab/images/card.png', 'card-image'); 
+
+   radioWrapper.appendChild(image); 
+
+  }); 
+
+} 
+
+ 
+
+export default function decorate(element, fieldJson, container, formId) { 
+
+    element.classList.add('card'); 
+
+    createCard(element, fieldJson.enum); 
+
+    subscribe(element, formId, (fieldDiv, fieldModel) => { 
+
+        fieldModel.subscribe((e) => { 
+
+            const { payload } = e; 
+
+            payload?.changes?.forEach((change) => { 
+
+                if (change?.propertyName === 'enum') { 
+
+                    createCard(element, change.currentValue); 
+
+                } 
+
+            }); 
+
+        }); 
+
+    }); 
+
+    return element; 
+
+} 
